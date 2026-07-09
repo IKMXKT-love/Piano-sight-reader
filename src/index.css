@@ -1,0 +1,59 @@
+/* TailwindCSS 指令 */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   全局 CSS 变量系统 — 二次元主题皮肤基础层
+   所有主题相关的视觉参数均通过此处的变量控制，
+   支持运行时动态切换（JS 修改 :root 变量即可换肤）
+   ============================================================ */
+:root {
+  /* --- 面板背景（高斯模糊磨砂玻璃效果） --- */
+  --panel-bg-rgb: 15 15 30;          /* 深夜蓝底色 */
+  --panel-opacity: 0.72;             /* 面板透明度，可动态调整 */
+  --panel-blur: 20px;                /* backdrop-filter blur 半径 */
+  --panel-border-opacity: 0.18;      /* 面板边框透明度 */
+
+  /* --- 主题强调色 --- */
+  --accent-rgb: 168 85 247;          /* 紫罗兰 */
+  --accent-glow-rgb: 192 132 252;    /* 发光层 */
+
+  /* --- 五线谱区域 --- */
+  --staff-bg-rgb: 255 255 255;
+  --staff-bg-opacity: 0.06;
+
+  /* --- 动画时长 --- */
+  --transition-fast: 150ms;
+  --transition-normal: 300ms;
+  --transition-slow: 600ms;
+
+  /* --- 字体 --- */
+  --font-display: 'Noto Serif SC', serif;
+  --font-body: 'Noto Sans SC', sans-serif;
+}
+
+/* 深色基础层 */
+html, body {
+  @apply bg-gray-950 text-white;
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 深色模式下拉框修复：强制 option 文字为黑色以确保可读性 */
+select option {
+  color: #000 !important;
+  background: #fff !important;
+}
+
+/* 磨砂玻璃面板工具类 */
+@layer components {
+  .glass-panel {
+    background: rgba(var(--panel-bg-rgb) / var(--panel-opacity));
+    backdrop-filter: blur(var(--panel-blur));
+    -webkit-backdrop-filter: blur(var(--panel-blur));
+    border: 1px solid rgba(255 255 255 / var(--panel-border-opacity));
+    border-radius: 1rem;
+  }
+}
